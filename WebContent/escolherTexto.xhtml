@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title><ui:insert name="title">Programar com fé eu vou, que a fé não costuma falhar...</ui:insert></title>
+</h:head>
+
+<body bgcolor="#F8F8FF">
+
+	<h2 align="center">Selecione um texto na lista para recombinar</h2>
+
+	<div align="center">
+		<h:form id="form">
+			<h:panelGrid columns="1">
+				<p:commandButton 
+					id="voltarButton" 
+					value="Voltar"
+					action="#{textoBean.reiniciar()}" 
+					style="position: absolute; right: 0%" />
+				<p:dataTable var="texto" 
+					value="#{textoBean.getTextos()}" 
+					paginator="true" 
+					id="dataTablePosts" 
+					emptyMessage="Nenhum texto salvo" 
+					loadingMessage="Atualizando..." 
+					style="text-align: center; max-width: 1200px; min-width: 500px;" 
+					rows="15"
+					selection="#{textoBean.textoSelecionado}" 
+					selectionMode="single"
+					rowKey= "#{texto.toString()}">
+		
+					<f:facet name="header">  
+		            Click na opção desejada após selecionar o texto  
+		        	</f:facet>
+		
+					<p:column headerText="Textos" style="text-align: center; max-width: 1120px; min-width: 500px; overflow: scroll; ">
+						<h:outputText value="#{textoBean.get12Palavras(texto)}" />
+					</p:column>
+		
+					<f:facet name="footer">
+						<p:commandButton id="viewButton" value="Ver detalhes" icon="ui-icon-search"
+							update=":form" oncomplete="textDialog.show()" />
+						<p:commandButton id="editButton" value="Criar Recombinação" icon="ui-icon-pencil" 
+							update=":form:display" rendered="#{not empty textoBean.textoSelecionado}" action="#{textoBean.marcaRecombinar()}" />
+					</f:facet>
+				</p:dataTable>
+			</h:panelGrid>
+	
+			<p:dialog id="dialog" header="Detalhes do Texto" widgetVar="textDialog" 
+				resizable="true" showEffect="clip" hideEffect="explode">
+	
+				<h:panelGrid id="display" columns="2" cellpadding="4">
+					<h:outputText value="#{textoBean.textoSelecionado}" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</div>
+
+</body>
+
+</html>

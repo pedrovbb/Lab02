@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title><ui:insert name="title">Programar com fé eu vou, que a fé não costuma falhar...</ui:insert></title>
+</h:head>
+
+<body bgcolor="#F8F8FF">
+
+	<h2 align="center">Recombine seu texto...</h2>
+
+	<div style="position: absolute;left: 27%;top: 20%">
+		<h:form id="form">
+			<p:growl id="growl" showDetail="true" life="10000" autoUpdate="true" />
+			<h:panelGrid columns="1">
+				<p:selectOneMenu value="#{textoBean.estrategiaSelecionada}">
+					<f:selectItem itemLabel="Selecione uma estratégia" itemValue="" />
+					<f:selectItem itemLabel="Inversa" itemValue="INVERSA" />
+					<f:selectItem itemLabel="Aleatória com Repetição" itemValue="COM_REPETICAO" />
+					<f:selectItem itemLabel="Aleatória sem Repetição" itemValue="SEM_REPETICAO" />
+				</p:selectOneMenu>
+				<p:inputTextarea rows="10" cols="70" value="#{textoBean.textoRecombinado}" />
+			</h:panelGrid>
+			<h:panelGrid columns="3">
+				<p:commandButton id="recombinarButton" value="Recombinar" action="#{textoBean.recombinarEstrategia()}" update="form" disabled="#{textoBean.isBotaoHabilitado()}"/>
+				<p:commandButton id="salvarButton" value="Salvar" action="#{textoBean.salvar(textoBean.textoRecombinado)}" update="form" />
+				<p:commandButton id="voltarButton" value="Voltar" action="#{textoBean.reiniciar()}" ajax="false" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title">Programar com fé eu vou, que a fé não costuma falhar...</ui:insert></title>
+</h:head>
+
+<body bgcolor="#F8F8FF">
+	<p:growl id="growl" showDetail="true" life="10000" autoUpdate="true"/>
+	<div style="position: absolute;left: 40%;top: 40%">
+		<h:form id="form_Inicial_Botoes">
+			<p:commandButton value="Novo Texto" id="buttonCadastrar" action="cadastrar" ajax="false" />
+			<p:commandButton value="Criar Recombinação" id="buttonRecombinar" action="escolherTexto" ajax="false" />
+		</h:form>
+	</div>
+</body>
+</html>
+
+
+<!-- todos os icons de botões: http://jqueryui.com/themeroller/ -->
